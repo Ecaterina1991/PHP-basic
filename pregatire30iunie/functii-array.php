@@ -839,12 +839,27 @@
 
 //);
 
-$array = [1, 5, '8', 6, 3, '7'];
+// $array = [1, 5, '8', 6, 3, '7'];
 
-sort($array, SORT_NUMERIC);
+// sort($array, SORT_NUMERIC);
 
-echo "<pre>";
-      print_r($array);
-echo "</pre>";
+// echo "<pre>";
+//       print_r($array);
+// echo "</pre>";
+
+
+$v= "Valentin";
+$e= "Ecaterina";
+
+function concatenare() {
+$GLOBALS['z'] = $GLOBALS['v'] . $GLOBALS['e'];
+}
+
+concatenare();
+
+echo $z;
+
+//variabila superglobala GLOBALS[''] face accesibile variabilele abordate de oriunde. se trece intre [] si intre ''  numele variabilei
+
 
 ?>
