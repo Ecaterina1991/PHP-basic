@@ -1,0 +1,1338 @@
+        // Functiile se gasesc in toate limbajele de programare si sunt similare cu functiile matematice
+
+           O functie reprezinta un bloc de instructiuni ce poat efi folosit de mai multe ori in cadrul aceleasi program. Blocul respectiv
+           i se atribuie un nume, apoi ori de cate ori este necesar se executa blocul, programatorul trebuie sa apeleze functia. La fiecare apel al functiei
+           intreg blocul de instructiuni se va executa!
+
+           Iata un exemplu de functie in PHP
+
+           Exista doua tipuri de functii in PHP
+
+           1. Functii predefinite cum ar fi
+
+           print_r  - Afiseaza informatia despre o variabila intr-un mod in care poate fi citit de oameni
+
+           In PHP exista peste 1000 de functii predefinite ( o parte din puterea PHP )
+
+           2. Functii definite de utilizator
+
+           Bineinteles, un program nu ar mai fi atat de interesant daca am fi limitati la doar o functie definite in limbajul PHP. Astfel, limbajul PHP
+           ne pune la dizpozitie o modalitate prin care putem defini functii ( cu propriul nume, component, argument si asa mai departe
+
+
+           Definirea functiilor
+
+
+           Sintaxa:
+
+           In definirea unei functii trebuie sa avem in verdere urmatoarele :
+
+           - Numele functiei
+           - Argumentele pe care le poate primi
+           - Setul de instructiuni
+
+           function numele_functiei($argument1,$argument2,...){
+
+            instructiunea 1
+
+            // corpul functiei intre acolade
+
+           instructiunea 2 si asa mai departe
+
+           }
+
+
+           Observatii :
+
+           Numele functiei trebuie sa respecte aceeasi regula ca si numele de variabile, constante ( sa inceapa cu o litera, sau underscore, urmat
+           de oricate litere sau underscoere)
+
+           Numele functiei trebuie sa fie UNIC ( nu pot exista doua functii cu acelasi nume )
+
+           Numele functiilor  este case-insensitive ( este recomandat, totusi folosirea literelor mici )
+
+           Argumentele sunt defapt variabile
+
+           Spre deosebire de alte limbare de programare PHP nu specifica tipul de date
+
+
+
+           Exemplu de functie care calculeaza cubul unui numar
+
+
+
+            function cub($a){
+
+                        $cub = $a * $a * $a;
+                        print "Cubul numarului $a este $cub";
+
+
+                    }
+                    cub(5); // va afisa 125
+
+
+
+            Exemplu de functie care afiseaza N numere naturale
+
+
+              function n_numere($n){
+
+                        print "Primele $n numere naturale sunt: ";
+
+                        for($i = 1; $i < $n; $i++){
+
+                            print "$i";
+
+                        }
+
+                    }
+                    n_numere(5); // va afisa 1,2,3,4,5
+
+
+
+
+
+                    Apelarea functiilor
+
+                    Pentru a apelul unei functii este necesar sa cunoastem urmatoarele elemente :
+
+                    1. Numele functiei
+                    2. Numarul de parametri care sunt acceptati de functie si pe care vrem sa ii transmitem
+                    3. Eventual valoarea intoarsa de functie - vom discuta mai tarziu acest aspect
+
+                    Exemplu de apelari
+
+                    salut(); // apelam functia salut fara niciun parametru
+
+                    cub(37); // apelam functia cub cu valoarea 37
+
+                    $a = 5;
+
+                    cub($a); // apelam functia cub cu valoarea variabilei $a, adica 5 de mai sus
+                    cub($a + 1); // apelam functia cub cu valoarea expresiei $a + 1;, adica 6 sau $a++
+                    cub(M_PI); // apelam functia cub cu valoarea constantei M_PI ( 3.141....)
+
+
+
+
+                    Argumente ca valoare
+
+                    Un aspect foarte important in apelul functiilor este acela ca, atunci cand o functie este apelata acesteia i se transmite, de fapt
+                    valoarea variabilei si nu variabila insasi.
+
+                    Iata un exemplu
+
+
+      /* Definim functia incrementare care primeste argumentul $a. Astfel spus $a, este variabila locala in cadrul functiei incrementare */
+
+        function incrementare($a){
+
+            $a = $a + 1;
+
+
+        }
+
+        // Definim variabila $x
+
+        $x = 9;
+
+        /* Apelam functia cu expresia $x, decii functia va primi ca parametru valoarea variabilei $x, si nu variabila $x :)  */
+
+
+        incrementare($x);
+
+
+        /* Pe ecran va fi afisat valoarea 9 pentru ca variabila $x nu a fost modificata  */
+
+        echo $x;
+
+
+
+          Argumente ca referinta
+
+          Cateodata este util ca functia noastra sa modifice valoarea unor argumente primite. Pentru aceasta putem folosi operatorul & inaintea
+          argumentelor dorite pentru a marca fapt ca vom dori sa il primim prin referinta si nu ca vloare!
+
+
+
+
+            function functia_mea(&$parametru_modificabil){.....}
+
+
+
+
+        /// variabila $numar este transmisa ca referinta
+
+
+
+            function injumatateste(&$numar){
+
+                $numar = $numar / 2;
+
+            }
+            $x = 100;
+            injumatateste($x); // x define 50
+            injumatateste($x); // x devine 25
+            echo $x; // afiseaza 25
+
+
+            Valori implicite
+
+
+            Daca dorim ca un argument al unei animite functii sa fie optional atunci ii putem specifica valoarea implicita, valoarea ce va fi folosita
+            atunci cand utilizatorul nu specifica valoarea pentru acel parametru
+
+
+              function ridica_la_putere($numar,$putere = 2){
+
+
+                    $rezultat = $numar;
+
+                    for($i = 1; $i < $putere; $i++){
+
+                        $rezultat = $rezultat * $numar;
+
+                    }
+                    return $rezultat;
+
+                }
+
+                echo  ridica_la_putere(10,2) . "\n"; // afiseaza 100
+                echo ridica_la_putere(5) . "\n"; // afiseaza 25
+                echo ridica_la_putere(2,3); // afiseaza 8
+
+
+                Valorile implicite trebuie sa fi valori fixe, nu apeluri al functii, nume de variabile etc.
+                De asemenea, ele trebuie sa fie in dreapta celorlalte argumente
+
+                Un aspect interesant este acela ca putem transmite prin referinta argumentele care au o valoare implicita
+
+
+
+                        function numere_pare($lista, &$numere_pare = array()){
+
+                            $am_gasit_numere_pare = false;
+
+                            foreach ($lista as $numar){
+
+
+                                if($numar % 2 === 0){
+                                    $am_gasit_numere_pare = true;
+                                    $numere_pare[] = $numar;
+
+
+                                }
+
+
+                            }
+
+                            return $am_gasit_numere_pare;
+                        }
+
+                    $lista = array(1,5,8,9,12);
+
+                    if(numere_pare($lista,$pare)){
+
+                        echo "Am gasit urmatoarele numere pare: " .implode(",  ",$pare);
+
+                    }
+
+
+                    Functii cu un numar varianil de argumente
+
+                    In acest sens avem la dizpozitie trei functii utilize
+
+                    1. func_num_args - intoarce numarul de argumente transmis functiei
+                    2. func_get_args - intoarce toate argumentele transmise functiei
+                    3. funct_get_arg($pozitie) -  intoarce argumentele de la pozitia $pozitie transmis functiei
+
+
+        function medie(){
+
+            $suma = 0;
+            $numar_argumente = func_num_args();
+
+            for($i = 0; $i < $numar_argumente; $i++){
+
+
+                $suma += func_get_arg($i);
+
+
+            }
+
+            return $suma / $numar_argumente;
+
+        }
+       echo medie(5,10,9); // va afisa 8
+        echo "<br>";
+      echo  medie(2,8,3,5,6,12); // va afisa 6
+
+
+        Variabile globale
+
+        Variabilele din interiorul unei functii sunt cu un scop local, iar asta presupune ce ele sunt disponibile doar in interiorul functii.
+        De asemenea, variabilele din afara unei functii nu sunt disponibile si in interiorul ei
+
+        Exista o modalitate de a declara o variabila in scop global pentru a o putea utiliza atat in afara functiilor cat si in interiorul lor
+
+        Desi bunele practici recomanda sa nu facem acest lucru, in interiorul unei functii pentru accesa variabile globale. Acest lucru se poate
+        realiza foarte simplu, prin cuvantul cheie gloabl
+
+
+
+         function mesaj(){
+
+                    // ops, grija mare cand utilizati gloabl
+
+                    global  $utilizator;
+
+                    echo "Salut, $utilizator";
+
+                }
+                $utilizator = "Dumitrescu Gabriel";
+
+                mesaj(); // va afisa Salut, ....
+
+
+                Variabile statice
+
+
+                O variabila statica exista doar in functie, dar nu-si pierde valoarea cand se iese din functie
+                       function test_variabila_statica(){
+
+                           static $a = 0;
+                           echo $a;
+                           $a++;
+
+                       }
+                       test_variabila_statica(); // va afisa 0 clar
+                        test_variabila_statica(); // va afisa 1
+
+
+
+
+                 Returnarea valorilor
+
+                 Pe masura ce aprofundati PHP, veti remarca faptul ca majoritatea functiilor pe care le veti scrie intoarce ( return ) o anumita
+                 valoarea, o valoarea ce va fi utiliza in contextul din care ati "chemat"  functia respectiva. Evident, foarte multe functii nu ar avea
+                 niciun sens daca nu am putea sa procesam intr-un fel rezultatul acestora
+
+                 Cuvantul cheie folosit in PHP pentru a intoarce rezultatul unei functii catre apelant este return.
+
+                 Sintaxa este aceasta:
+
+                    return expresie_sau_variabila;
+
+
+                        function numar_impar($x)
+                            {
+
+
+                                if ($x % 2 !== 0) {
+
+
+                                    return true;
+
+                                } else {
+                                    return false;
+                                }
+                            }
+
+                            $n = 49;
+                            if(numar_impar($n)){
+
+                                echo "$n este impar!";
+
+                            }else{
+                                echo "$n este par!";
+                            }
+
+
+
+
+
+                            Returnarea prin valoare
+
+                            Implicit, functiile intorc valoarea returnata de expresia folosita in return. Aceasta inseama ca daca folosim
+                            o expresie de tipul return $variabila, functia va intoarce valoarea variabilei $variabila, si nu referinta acesteia
+
+
+                            iata un exemplu
+
+
+
+                                    function test(){
+
+                                        global  $a;
+                                        return $a; // intoarcem valoarea lui $a adica 1
+                                    }
+                                    $a = 1;
+
+                                    $x = test(); // x preia valoarea returnata din functie, adica 1
+                                    $x++; // crestem x cu 1
+                                    echo "a = $a, x=$x"; // va afisa a=1 ,  x = 2
+
+
+
+                             Returnarea prin referinta
+
+                             Prin comparatie cu metoda implicita de returnare prin valoare, returnarea prin referinta preia chiar referinta
+                             catre o variabila, si nu valoarea acesteia. Iata un exemplu analog de intoarcere prin referinta:
+
+
+
+
+                                function &test(){
+                                        global  $a;
+                                        return $a; // intoarcem referinta catre $a
+
+
+                                    }
+
+                                    $a = 1;
+                                    $x = &test(); // x preia referinta returnata de functie adica $a
+                                    $x++; // am uitat sa il maresc cu 1
+                                    echo  "a = $a, x = $x"; // va afisa a = 2 , x = 2
+
+
+
+
+                                    Doua mentiuni :
+
+
+
+                                    1. Pentru ca returnarea prin referinta sa functioneze este necesar ca numele  functiei sa fie precedat de simbolul
+                                    & ( function &test)
+
+                                    2. La apelul functiei trebuie sa folosim simbolul & inaintea numele functiei ( $x = &test() )
+
+
+
+                                    Functii anonime ( closures)
+
+
+                                    In practica, vom avea adeseori nevoie de functii pe care sa le folosim doar intr-o singura instructiune,
+                                    caz in care ne este nevoie sa le declaram ca o functie obisnuita. Aceste functii poarta numele de functi anonime,
+                                    tocmai pentru ca nu au un nume. In limba engleza functiile aninime sunt cunoscute si sub numele de closures. De
+                                    cele mai multe ori aceste functii sunt folosite pe fost de callback ( un argument de functie transmis unei functii
+                                    cu scopul de a fi apelata pentru o anumita procesare )
+
+                                    In PHP au aparut cu versiunea 5.3
+
+
+                                    iata un exemplu
+
+
+
+
+        function suma($a,$b,$callback){
+            return $callback($a) + $callback($b);
+        }
+
+
+        $a = 5;
+        $b = 2;
+
+        echo suma($a,$b, function ($x){
+            echo "<br>";
+            return $x;
+
+        }); // va afisa 7
+        echo suma($a,$b, function ($x){
+            echo "<br>";
+            return $x * $x; 
+
+        }); // va afisa 29
+
+        echo suma($a,$b, function ($x){
+
+            return $x * $x * $x;
+            echo "<br>";
+        }); // va afisa 133
+
+
+            Sa analizam exemplul de mai sus, am definit o functie suma care primeste 3 argumente
+
+            - $a - primul numar
+            - $b - al doilea numar
+            - $callback - o functie anonima
+
+
+            Functia suma va afisa suma dintre doua numere rezultate din apelul functiei $callback, asupra fiecarui dintre cele doua numere ca input.
+            Astfel sus putem sa ii pasam o functie anonima care intoarce patratul unui numar si in felul acesta vom obtine suma  patratelor celor doua numere,
+            fara sa modificam in niciun fel functia suma
+
+
+            In exemplul nostru, am apelat functia de 3 ori, cu 3 functii anonime diferite, una care intoarce fix numarul primit, alta care intoarce patratul
+            numarului primit si alta care intoarce  cubul numarului primit.
+
+            Veti intalni exemple mai complexa ale acestui tip de functii in curand, cand vom studia functii de sortare ( ex usort )
+
+
+            Exemple de functii predefinite in PHP
+
+            print_r ->  Afiseaza contnutul unei variabile
+            var_dumb -> Afiseaza continutul unei variabile cat si tipul acesteia
+            die, exit -> Incheie executia scriptului pHP
+            isset -> Verifica daca o variabila este definita ( si valoarea acesteia nu este NULL)
+            set_time_limit -> Seteaza durata maxim ( in secunde ) de executie a scriptului. Daca scriptul dureaza mai mult decat numaurl de secunde specificat
+            atunci el va fi intrerupt fortat
+
+            Cam atat pana acum, la 18 fix continuam ;)
+
+
+
+            Tablouri
+
+            Notiuni generale
+
+
+            Tablourile ( array )  reprezinta un tip compus de variabile incare se pot pastra mai multe valori. Valorile unui tablou sunt asociate
+            unor chei
+
+            Fiecare cheie identifica in mod unic o anumita valoare. Astfel intr-un tablou putem avea mai multe valori identifice, dar nu si mai multe
+            chei identice, daca exista chei identice, se vor suprascrie valorile:
+
+
+                $exemplu = array(1=>'a',2=>'b',1=>'c'); // direct eroare avem doua chei identice
+                print_r($exemplu); // Array ([1] => c[2] => b)
+
+
+            Implicit, cheile tabloului  sunt numere naturale si incep de la 0 ( 0,1,2,3,4,5,6, infinit (
+
+            Pentru a initializa/ defini o variabila de  tip array, spre deosebire de variabile scalare ( int, float, bool  sau string ), unde trebuie
+            sa atribuim o valoare, aici avem nevoie de keyword-ul array, sau constructia prescurtata, daca avem o versiunea de PHP mai mare de 5.4
+
+
+        $cumparaturi =  array('mere','pere','gutui'); // chei implicite
+        $cumparaturi = ['mere','pere','gutui']; // varianta prescurtata dupa PHP 5.4
+
+
+            Accesarea elementelor
+
+
+
+            Dupa cum am mentionat in sectiunea precedenta, elementele tab, pot fi accesate folosind cheiile corespunzatoare. Astefel, pentru a accesa
+            elementul 'gutui' va trebui sa folosim cheia 2
+
+            Sintaxa urmatoare este :
+
+
+
+
+              $cump = array("mere","pere","gutui");
+
+                    echo $cump[0] . '<br>'; // va afisa mere
+                    echo $cump[1] . '<br>'; // va afisa pere
+                    echo $cump[2]; // va afisa gutui
+
+
+               Intre paranteze patrate trebuie sa specificam cheia elementului pe care dorim sa-l accesam
+
+               Cheia respectiva poate fi specificata atat ca un numar dar si ca o expresie sau variabila in exemplele de mai jos :
+
+
+                    cump = array("mere","pere","gutui");
+                            $a = 1;
+                            echo $cump[$a]; // va afisa pere, pentru ca $a are valoarea 1
+                            echo $cump[1+ $a]; // va afisa gutui pentru ca 1+ $a este 2
+
+
+
+                    Chei ( key )
+
+
+                    Restrictii
+
+                    Desi valorile dintr-un array pot fi de orice tip, cheile trebuie sa fie doar de tip int sau string. Din acest motiv, orice cheie
+                    specificata sub forma unui alt tip va fi convertit la string sau int, conform regulii:
+
+                    Stringurile care contin intregi vor fi convertite la tipul int. Spre exemplul, cheia "8"(string) va fi stocata ca 8(int).
+                    Pe de alta parte, cheia "08" nu va fi converita si va fi stocata ca un string
+                    Cheile de tip floats vor converite la int, ceea ce inseamna ca partea functionara va fi eliminata.
+
+                     exemplu:
+
+                     $array = array(
+
+                        1 => "a",
+                        "1"=> "b",
+                        1.5 => "c",
+                        true => "d",
+
+                     );
+                            var_dump($array);_
+
+                        Stergerea unui array
+
+                        Un array poate fi  sters in totalitate sau putem sterge doar unul sau mai multe elemente din acesta. Pentru ambele operatiuni vom
+                            folosi functia unset
+
+                            Sintaxa este urmatoarea:
+
+
+                            - Pentru a sterge intre tabloul unset($tablou)
+                            - Pentru a sterge un anume alement : unset($tablou['cheie'])
+
+                            exemplu :
+
+
+                                     $rate = array('tv'=>150,'casa'=>1300,'masina'=>600);
+
+                                            echo "La ora actuala am " . count($rate) . "rate\n";
+
+                                            // peste cateva luni ...
+
+                                            unset($rate['tv']);
+                                            echo "Am mai ramas doar cu " . count($rate) . 'rate';
+
+
+                                            // peste o eternitate
+
+                                            unset($rate);
+
+
+                                   Atentie la cheile array-urilor atunci cand se sterg elemente : array-ul nu este reindexat atunci cand se sterg elemente.
+                                   Acesta inseamna ca pentru array-uri indexate numeric vor ramane goluri atunci cand se sterge un element
+
+
+
+                                   Ordonarea elementelor
+
+                                   sort => sortare dupa valoare
+
+                                    In practica, de foarte multe ori, va fi necesar sa ordonam un array. Limbajul PHP, ne pune la dizpozitie o paleta
+                                    larga de functii utile acestui scop
+
+                                    Cea mai cunoscuta si utilizata functie pentru sortare esteeeeeee sort
+
+                                        bool  sort (array &$array [ , int $sort_flags = SORT_REGULAR] )
+
+                                        Functia sort  intoarce TRUE sau FALSE   ( atunci cand, din cauza unei erori nu a putut sorta array-ul primit ca parametru
+
+
+                                        Argumentul $array  este transmis prin referinta, &$array, este transmis astfel pentru ca functia reindexeaza array-ul
+                                        astfel incat cheile vor fi sortate in functie de valorile elementelor
+
+                                        Al dolea parametru transmis functiei reprezinta tipul modalitatii de comparare a elementelor:
+
+                                        SORT_REGULAR => valoarea implicita, sortarea se face fara a schimba tipul elementelor ( elementele de tipuri  diferinte
+                                        vor fi comparate asa cum sunt
+                                        SORT_NUMERIC => elementele vor fi comparate numeric, deci daca nu sunt deja numere atunci acestea vor fi converite in nr
+                                        SORT_STRING => elementele vor fi comparate ca siruri de caractere, indiferent de tipul lor inital
+
+                                        Exista si alte 3 tipuri de sorate, mai putin utilizate in practica : SORT_LOCALE_STRING, SORT_NATURAL, SORT_FLAG_CASE
+
+
+                                        asort  - sortarea dupa valoare, pastrand cheile
+
+
+                                       $fructe = array("d"=>"lamaie","a"=>"portocale","b"=>"banane","c"=>"mar");
+
+                                       asort($fructe);
+
+                                       foreach ($fructe as $key=>$val){
+
+                                           echo "$key = $val\n";
+
+                                       }
+
+
+
+                                       La 19:00 o sa terminam, iar partea 2 o sa aiba loc Duminica seara ( inregistrarile o sa fie pe youtube )
+
+
+                                       usort => sortare dupa valoare folosind o anumita functie pentru comparare
+
+
+
+                                                function cmp($a,$b){
+
+
+                                                    if($a == $b){
+                                                        return 0;
+                                                    }
+                                                    return ($a < $b ) ? -1 : 1;
+                                                }
+                                                    $a = array(3,2,5,6,1);
+                                                usort($a, "cmp");
+
+                                                    foreach ($a as  $key => $value){
+
+                                                        echo "$key : $value";
+
+                                                    }
+
+                                                    uasort ( usort cu pastrarea cheilor )
+
+                                                    uasort este similara cu functia asort, cu expectia faptului ca pentru comparare se foloseste o functie create de utilizator
+
+                                                           function cmp($a , $b){
+                                                                            if($a == $b){
+                                                                                return 0;
+                                                                            }
+                                                                            return  ($a < $b) ? -1 : 1;
+                                                                        }
+                                                                        $array = array("a"=>4,"b"=>8,"c"=>-1,"d"=>9,"e"=>2);
+                                                                        print_r($array);
+
+                                                                        uasort($array, "cmp");
+                                                                        print_r($array);
+
+
+
+                                                           ksort -> sortarea in functie de cheie
+
+                                                                   $fructe = array("d"=>"lamaie","a"=>"portocale","b"=>"banana","c"=>"mar");
+                                                                        ksort($fructe);
+                                                                        foreach ($fructe as  $key=>$val){
+
+                                                                            echo "$key = $val <br>";
+
+                                                                        }
+
+
+          Alte functii utile
+
+            explode
+             Functia explode creaza un array dintr-un string. String-ul este impartit in mai multe parti in functie de delimitator iar array-ul va contine
+             ca elemente toate aceste parti
+
+
+
+
+        $pozitie = "Horia este sus";
+        $cuvinte = explode(" ", $pozitie );
+        var_dump($cuvinte);
+
+
+                    implode
+
+                    Functia complementara a lui explode este implode ( puteti sa va ganditi la explozie si implozie ). Efectul este invers fata de functia
+                    explode: va prelua un array si va crea un string pe baza acestuia, unind elementele intre ele folosind un string
+
+$cuvinte = array("Horia","bea","apa");
+
+        $pozitie = implode(" ", $cuvinte);
+        echo $pozitie;
+
+
+
+
+        List
+
+        Functia list atribuie valori corespunzatoare dintr-un array fiecarei variabile primite ca argument
+
+
+ $cuvinte = array("George", "bea","apa");
+        list($subiect,$predicat,$complement) = $cuvinte;
+        echo "Subiect: $subiect; $predicat;$complement";
+
+
+        Aplicatii ale tablourilor
+
+        Multimi
+
+        In foarte multe programe tab sunt folosite pentru a reprezinta diverse structuri de date. Cea mai comuna este aceea a multimilor. Limbajul
+        PHP, ne pune la dispozitie o serie de functii pentru a efectua operatiile similare din MATEMATICA :)
+
+
+
+        Diferenta a douamultimim array_dif
+
+
+
+        array_dif => sunt utile pentru a regasi elemente dintr-o multime care nu sunt prezentate in alta
+
+ $listacumparaturi = array("mere","pere","branza","oua");
+
+        $produsdincos = array("pere","oua");
+
+        $produsdecumparat = array_diff($listacumparaturi,$produsdincos);
+        echo "Trebuie sa mai cumpar : " . implode(" , ", $produsdecumparat);
+
+
+
+        Reuniune - array_merge
+
+        Doua sau mai multe array-uri se pot combina intr-una singura folosind functia array_merge
+        Alternativ, daca se doreste combinarea strict doua array-uri se poate folosi si operatorul +
+
+
+$taskuripersonale = array("udat","flori","gatit","dus gunoiul");
+       $taskurideserviciu = array("intalnire client", "prezentare produs");
+       $taskuri = array_merge($taskuripersonale,$taskurideserviciu);
+       echo "<pre>";
+       print_r($taskuri);
+
+
+
+       In cazul operatorului + se va tine cont de cheie la combinarea celor doua array-uri. Astfel dacao cheie exista deja in stanga elementului din dreapta
+       corespunzator nu va fi copiata
+
+$calendar = array("1900"=>"Intalnire afaceri","2000"=>"Meci");
+       $evenimente = array("1900"=>"Ceai","2100"=>"Film");
+
+       $program = $calendar + $evenimente;
+       echo "<pre>";
+       print_r($program);
+
+
+
+                            Stive
+
+
+
+
+            Stiva este o structura de date avansata, dar a carei functionare este foarte simpla : este un set de elemente cu proprietatea ca elementul
+            care se extrage din set va fi intotdeauna cel mai recent element introdus in set. Va puteti imagina o stiva de caltite, una peste alta
+
+            In limbajul PHP exista doua functii cu care putem efectua aceste doua operatiuni ( de adaugare si de extragere ) . In limba engleza stiva
+            este cunoscuta sub denumirea de stack
+
+
+            Hai sa vedem cu functioneaza :
+
+
+              $rucsac = array("izopren","sac de dormit","haine");
+                            array_push($rucsac,"bocanci");
+
+                            // vrem sa scoatem sacul de dormit, care este sub haine si bocanci
+
+                            do {
+
+                                $obiect  = array_pop($rucsac);
+
+                            }while($obiect != "sac de dormit");
+                            echo "Dupa ce am scos sacul de dormit, in rucsac mai am: " . implode($rucsac);
+
+
+
+
+                      Cozi
+
+           Cu siguranta am intalnit termenul de cozii in viata noastra, in programarea functioneaza la fel : primul venit, primul servit
+           ( FIFO - First in First Out)
+
+           In PHP avem o functie utila pentru a lucra cu aceasta structura de date : array_shift ( cu care vom extrage dintr-un array primul
+           element introdus; similar exista si o functie numita array_unshift prin care vom putea introducere un element pe prima pozitie )
+
+
+           sa vedem un exemplu
+
+
+             $produse = array("paini"=>7,"oua"=>11,"mere"=>5);
+
+                         $clienti = array();
+
+                         $clienti[] = "Andrei";
+                         $clienti[] = "Doina";
+                         $clienti[] = "Sorin";
+
+                         // Presupunem ca fiecare client va dori sa cumpere 3 paini, 3 oua si 2 mere
+
+
+                       do{
+                           $client = array_shift($clienti);
+
+                           $paini = min($produse['paini'], 3);
+                           $produse['paini'] -= $paini;
+
+                           $oua = min($produse['oua'], 3);
+                           $produse['oua'] -= $oua;
+
+                           $mere = min($produse['mere'],3);
+                           $produse['mere'] -= $mere;
+
+                           echo "$client  a cumparat $paini paini, $oua oua, $mere mere\n <br>";
+                       }while(count($clienti));
+
+                       echo "In magazin au mai ramas $produse[paini] paini, $produse[oua] oua, $produse[mere] mere";
+
+
+
+                    // bun gata pana aici :)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

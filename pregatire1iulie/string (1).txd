@@ -1,0 +1,559 @@
+
+
+Siruri de caractere
+
+
+        Le-am intalnit deja in cap precedente, dar in acest capitol vom discuta pe larg despre
+        string-uri si modul in care le putem gestiona eficient in PHP
+
+        Un string nu este nimic altceva decat o insusire de caractere. Fiecare caracter dintr-un string este un byte. Iar 1 byte = 8 biti - ceea
+        ce inseamna ca nativ, in PHP vom putea gestiona cel mult pow(2,8) = 256 caractere :)
+
+        Desi probabil, in practica nu veti atinge prea des aceasta limita, este bine de mentionat ca dimenisunea maxima pentru un string in php
+        este de 2GB
+
+        Exista 4 moduri de a defini un string
+
+        1. Prin apostrofuri - ghilimele simple
+
+        $string = 'Horia are mere';
+
+        2. Prin ghilimele duble
+
+        $string = "Am luat nota mica";
+
+        3. Prin notatia heredoc
+
+        $string =<<<HEREDOC
+        Ana are mere
+        HEREDOC;
+
+        4. Prin notatia nowdoc
+
+        $string  =<<<'NOWDOC'
+        Ana are mere
+        NOWDOC;
+
+        Definirea prin apostrofuri
+
+        Particularitatea definirii de string-uri folosind apostrofuri este aceea ca variabilele din interiorul string-urilor nu vor fi expandate ( interpetrate )
+
+        $fruncte = "mere";
+
+        echo 'Ana are $fructe'; // pe ecran va aparea : Ana are $fructe
+
+        De asemenea, trebuie gestionata si situatia in care dorim sa folosim apostrofuri in string-ul nostru. In acest caz nu trebuie decat sa
+        prefixam apostroful respectiv cu caracteru \ ( backslash )
+
+
+
+        echo 'Caracterul \ ' se numeste apostrof';
+        // pe ecran va aparea : Caracterul \ se numeste apostrof, incercati si voi
+
+        Similar daca, dorim sa afisam caracterul \ il vom prefixa cu el insusi:
+
+
+        echo 'Caracterul \\ se numeste backslash';
+
+        // pe ecran va aparea : Caracterul \ se numeste blackslah
+
+
+
+        Secventa                                                    Semnificatie
+
+
+        \n                                          linie noua ( caracterul LF - line feed; sau 0X0A ( 10 ) in ASCII )
+        \r                                          caracterul intoarcere ( CR - carriage return; sau 0X0D ( 13 ) in ASCII )
+        \t                                          tab oriziontal ( HT - horizontal tab, sau 0X09 ( 9 ) in ASCII )
+        \v                                          tab vertical ( VT -  vertical tabl, sau 0X0B ( 11 ) in ASCII )
+        \e                                          escape ( caracterul special ESC; sau 0X18 ( 11 ) in ASCII )
+        \f                                          form feed ( FF sau 0XCC ( 12 ) in ASCII ( incepand cu php 5.2.5 )
+        \\                                          backslash
+        \$                                          semnul dolar
+        \"                                          ghilimele duble
+        \[0-7]{1,3}                                 o secventa care denota un caracter reprezentat in octal ( o cifra de la 0 la 7 )
+                                                    repetata o data, de doua sau cel de trei ori : ex ( \75)
+        \x[0-9A-Fa-f]{1,2}                          o secventa care denota un caractere reprezentat in hexazecial ( x urmat de o cifra de la 0 la 9
+                                                    sau o litera de la A la F repetata o data sau de doua ori ex ( \x7C
+
+
+
+
+        ( o sa incheiem la 23:00 ) partea 3 o sa aiba loc maine de la ora 20 - 23 )
+
+
+        Determinarea lungimii
+
+        Lungimea unui sir de caractere poate fi determinata folosind functia strlen
+
+        $sms = "Alo, te astept, unde esti?";
+
+                    $lungimeSms = strlen($sms);
+                    echo $lungimeSms; // va aparea 26
+
+          Extragerea unui subsir
+
+          In practica, ne vom lovi de situatii in care trebuie sa extragem un subsir dintr-un string mai mare.
+
+          Pentru acesta putem folosi functia substr
+
+          un exemplu :
+
+
+//            $sms = "Te astept la gara";
+//
+//            $locatie = substr($sms, -4); // ultimile 4 caractere
+//
+//            echo "Loc de intalnire : $locatie"; // va fi afisat Loc de intalnire :  gara
+//
+
+            // sau
+
+echo "<br>";
+
+            $sms = "Te astept la gara";
+
+            $locatie = substr($sms,13,-2); // de la pozitia 13 pana la antepenultima
+
+            echo "Loc de intalnire: $locatie"; // va afisa : Loc de intalnire : ga
+
+
+Cautarea in sir
+
+        Functia strpos
+
+        In ex anterioare am presupus ca am fi cunoscut deja pozitia la care se regaseste cuvantul de intere "gara". Totusi, in practica
+        nu ne putem bucura din acest privilegiu. Dar avem o serie de unele puse la dispozitie de limbaj. Dintre aceastea cea mai cunoscuta
+        si utilizata este functia strpos
+
+
+         $litere = "ABCDEFSQWEQEWQEQWEWQQWE";
+
+                    $pozitie = strpos($litere,'C');
+
+                    echo "Litera C este a $pozitie-a din alfabet";
+                    //Litera C este a 2-a din alfabet
+
+
+               Litera C este a doua din alfabet?    NU, Totusi de ce in exemplu de mai sus afiseaza asta? Pentru ca, precum probabil
+               v-ati obisnuit deja, indexarea in majoritatea limbajelor de programare incepe de LA 0 :) . Asta inseamna ca, in exemplul de mai sus
+               , A este pe pozitia 0, B pe pozitia 1, C pe pozitia 2, D pe pozitia 3 si asa mai departe. Functia strpos nu face nimic altceva decat
+               sa afiseze pozitia la care se gaseste substring-ul respectiv in string-ul specificat
+
+
+                $litere = "ABCDEFGHIJKLMNOP";
+
+                       $pozitie = strpos($litere,'C')+1;
+
+                       echo "Cifra 3 este a $pozitie-a cifra para"; // Cifra 3 este a 3-a cifra para
+
+
+                       Daaa acum are sens :)
+
+                       Sa mai facem un exemplu
+
+
+                         $cifre_pare = "02468";
+
+                               $pozitie = strpos($cifre_pare,'3') + 1;
+
+                               echo "Cifra 3 esta a $pozitie-a cifra para";//Cifra 3 esta a 1-a cifra para
+
+
+                               Nu are sens nu? Acest lucru se intampla pentru ca cifra 3 nu este regasita in string-ul 02468
+                               si functia strpos intoarce fals pentru aceasta situatie. Totusi, in PHP, putem aduna valoarea 1 la fals
+                               ( care, numeric, are valoarea 0 ( si deci $pozitie 1 ( 0 + 1) de aici rezultatul eronat
+
+
+                               Solutia este sa tratam aceast caz :
+
+
+
+
+
+//        $cifre_pare = "02468";
+//
+//        $cifra = '3';
+//
+//        $pozitie = strpos($cifre_pare,$cifra);
+//
+//        if($pozitie !==false){
+//            $pozitie = $pozitie +1;
+//            echo "Cifra $cifra  este a $pozitie-a cifra para";
+//        }
+//
+
+        // Atentie la comparare folosind !== ( egalitate stricta ) si nu != ( egalitate ca valoare ) este o greseala, pe care o veti putea
+        // intalni frecvent in practica, iata un exemplu :
+
+
+
+        $lista_categori = "Tiberiu, Vlad, Ioana";
+
+        $concurent = 'Tiberiu';
+
+        $a_castigat = strpos($lista_categori,$concurent);
+
+        if($a_castigat){
+
+            echo "Felicitari,$concurent! Ai castigat!";
+
+
+        }else{
+            echo "Ne pare rau, $concurent, dar nu ai castigat!";
+        }
+        // de ce nu afiseaza corect? // va las pe voi
+
+
+
+        Alte functii - stripos
+
+        Dupa cum ne-am obisnuit deja, si functia strpos are cateva functii "prietene", foarte similare :
+
+        stripos
+
+        Este identica  cu strpos, cu exceptia faptul ca este case-insensitive ( nu tine cont daca literele sunt mici sau mari )
+
+             $utilizator = "superAdMiN";
+
+                        if(stripos($utilizator,'admin')){
+                            echo "Numele de utilizator cotine cuvinte interzise!";
+                        }
+
+
+            strstr
+
+            Similar cu stripos, functia strstr ( care se comporta ca strstr, doar ca este case-insensitive)
+
+
+
+           $email = "digital@info.ro";
+           $domeniu = strstr($email,'@');
+           echo $domeniu; // va afisa @info.ro
+
+           Compararea sirurilor ( si punem pauza pe seara aceasta )
+
+
+           Operatorul === si ==
+
+           Cel mai simplu mod de a compara doua string-uri este folosind operatorul == sau ===. Dupa cum stiti deja, operatorul ==
+           verifica egalitatea, iar operatorul === verifica egalitatea stricta ( atat valoarea cat si tipul celor doi operanzi trebuie
+           sa fie egale )
+
+           Trebuie sa avem grija atunci cand ( probabil, neintentionat ) ajungem sa comparam string-uri cu numere folosind operatorul ==
+           ( in dauna operatorului === ) . In aceasta situatie, trebuie tinut cont de urmatoarele reguli
+
+           1. String-ul va fi convertit la numar, iar comparatia va fi una numerica
+           2. Daca ambii operanzii sunt siruri dar contin reprezentari valide de numere, atunci comparatia se va face tot numeric
+
+
+                 $zero = 0;
+
+                   $string_gol = "";
+                   $cumparaturi = "6 mere, 4 pere";
+                   $bucuresti = "Bucuresti";
+
+                   var_dump($zero == $string_gol); // bool(false )
+                   var_dump($cumparaturi == 6); // bool(false)
+                   var_dump($bucuresti == $zero); // boo(false)
+
+
+
+
+    Functii de comparare
+
+
+    Limbajul PHP  ne pune la dispozitie si o serie de functii de comparare de string-uri.
+    Cea mai folosita functie este strcmp
+    Functia strcmp nu face nimic altceva decat sa compare cele doua stringuri si sa
+    intoarca valoarea 0 daca ele sunt egale, o valoare negativa daca $str1 este mai mica ca
+    $str2.
+    Trebuie tinut cont ca o litera este mai mica, in valoare ca alta daca codul ASCII al sau este
+    mai mic decat codul ASCII al celeilalte litere. Iata cateva exemple
+
+
+    var_dump('a' < 'c'); // true
+    var_dump('b' < 'a'); // false
+    var_dump('m' < 'M'); // false ( majusculele au codul ASCII mai mic decat minuscule
+
+        Functii inrudite cu strcmp:
+
+        - strcasecmp ( $s1,$s2 ) comparatia case-insensitive
+        - strncmp ($s1, $s2,$n)  comparatia doar pana la pozitia $n
+        - strncasecmp ( $s1, $s2, $n) comparatia doar pana la pozitia $n, case-insensitive
+
+
+        Inlocuirea de subsiruri
+
+        Am invatat deja cum putem inlocui un caracter dintr-un string, dar cum putem proceda
+        atunci cand vrem sa inlocuim un subsir cu un alt subsir? ( o situatie mai des intalnita
+        in practica ) . Raspunsul este simplu : functia str_replace
+
+           $str = "Ana are mere";
+            echo str_replace("mere","pere",$str); // va afisa Ana are pere
+
+        // o alta proprietate utila este aceea ca functia poate primi array-uri in loc de primele
+        // doua argumente :
+
+            $str1 = "Ana are mere";
+            echo str_replace(array("Ana","mere"),array("George","apa"),$str1);
+
+
+            Conversii minuscule - majuscule
+
+            Bineinteles, avem deja cunostintele necesare sper :) pentru a realiza o conversie
+            de minuscule in majuscule si invers:
+
+
+               $minuscule = "abcdefghijklmnop"; // aici e buba trebuie scrise corect pana la z
+                    $majuscule = "ABCDEFGHIJKLMNOP"; // incercati si voi, o sa va iasa!
+
+                    $text = "esti atent?";
+
+                    echo strstr($text,$majuscule,$minuscule);
+
+
+
+            Dar, dupa cum spuneam la inceput puterea limbajului PHP vine tocmai din numarul mare de functii predefinite:
+
+            strtopupper($s) - transforma toate minusculele in majuscule din stringul $s
+
+            strtolower($s)  - transforma toate majusculele in minuscule din stringul $s
+
+            ucfirst($s) - transforma primul caracter in majuscula
+
+            ucwords($s) - transforma primul caracter din fiecare cuvant in majuscula
+
+            si cateva exemple
+
+             $s = "ana are MERE";
+
+                 echo strtoupper($s);
+                 echo "<br>";
+                 echo strtolower($s);
+                 echo "<br>";
+                 echo ucfirst($s);
+                 echo "<br>";
+                 echo ucwords($s);
+
+
+
+
+             Eliminarea spatiilor (trim)
+
+
+             Cand lucram cu date primite de la utilizator ne vom lovi adesea de necesitatea eliminarii anumitor caractere de la inceputul sau de la sfarsitul datelor introduse( cel mai frecvent a spatiilor ).
+             Sursa acelor spatii de cele mai multe ori este un copy-paste ( grija si voi ) care a preluat mai mult decat intentiona utilizatorul sau un typo
+
+             PHP ne pune la dispozitie o functie prin care putem scapa de acele spatii inutile
+
+             iata un exemplu
+
+
+                $nume = "Ardeleanu              "; //  Exista mai multe spatii la finalul numelui
+
+                 $prenume = "            Dragos"; // Exista mai multe spatii la inceputul numelui
+
+                 echo trim($nume) . " " . trim($prenume);
+                 // Va afisa Ardeleanu Dragos
+
+             // Expresia afisata contine un singur spatiu ( intre cele doua cuvinte )
+
+
+Uneori s-ar putea sa dorim sa eliminam anumite caractere strict de la inceputul stringului
+sau strict de la sf acestuia
+
+ltrim - elimina caracter doar de la inceputul stringu-lui ( left trim )
+
+rtrim - elimina caracter doar de la sf string-ului ( right trim )
+
+
+
+    Formatare
+
+
+    Functia printf afiseaza pe ecran mesajul primit ca prin argumentul in care se vor inlocui
+    anumiti specificatori cu argumentele corespunzatoare
+
+       $str = "%s are %s";
+        $nume1 = "Ana";
+        $obiect1 = "mere";
+        $nume2 = "George";
+        $obiect2 = "apa";
+
+        printf($str,$nume1,$obiect1); // va afisa pe ecran ghiciti Ana are mere
+        printf($str,$nume2,$obiect2); // va afisa pe ecran George are apa
+
+        Putem sa remarcam doua aspecte in exemplul de mai sus :
+
+        - Am folosit aceeasi variabila str, pentru a specifica formatul; totusi mesjaul
+        afisat a fost diferit pentru ca am folosit alte argumente pentru specificatorii din
+        interiorul mesajului nostru.
+        - Functia printf nu a fost nimic altceva decat sa inlocuiasca primul %s cu primul
+        argument si al doilea %s cu al doilea argument.
+
+        Daca ar fi sa discutam mai riguros despre modul in care functioneaza functia prinff
+        ar trebui sa mentionam urmatoarele doua aspecte:
+
+        - Functia afiseaza asa cum apar toate caracterele fara un rol special
+        - Caracterul % urmat de alte cateva caractere este un specificator de format si va fi
+        inlocuit cu argumentul corespunzator trimis functiei dupa ce acesta va fi transofrmat
+        conform specificatorului respectiv ( primul % cu primul argument, al doilea cu al doilea
+        si asa mai departe )
+
+
+        Specificatori
+
+        aici avem mult de mancat :)) ( invatat )
+
+        - Facem in felul urmator, aici o sa va trimit in format docx, sunt multi tare
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Expresii regulate ( PCRE )
+
+        Extensia PCRE este inclusa in core-ul PHP si disponibila fara sa fie  nevoie de instalari suplimentare.
+        Aceasta extensie este derivata din Perl si ne ajuta la manipularea expresiilor regulate, oferindu-ne o serie de functii utile
+        O expresie regulata reprezinta un sablon ( pattern) , pe care il putem regasi intr-un string citit de la stanga la dreapta - adica normal pentru noi
+
+        De exemplu, in stirng-ul 'Ana, Mariana si Ion au fost prezent la spectacol, iar Stefan a lipsit'
+        putem sa extragem numele de persoane definind un pattern de genul : incepe cu litera mare, este format din litere si se termina cu o virgula sau un spatiu gol
+
+        /[A-Z]\w+[,\s]{1}/
+
+        Delimiatatori
+        Pattern-ul trebuie incadrat intre delimitatori, iar acestea pot fi oricare caracter non
+        alfa-numeric, diferit de blackslash si de spatiu. De obicei se foloseste slash, hash-ul (#)
+        sau tilda {~}
+
+        Exemple:
+
+        /food bar/
+
+        #^[^0-9]$#
+        +php+
+        %[a-zA-Z0-9_-]%
+
+        Delimitatorii, daca sunt prezenti in expresia pattern-ului, trebuie escapati cu backslash.
+
+        /http:\/\//
+
+        Se mai poate folosi si perechile inchis-deschise de () , [] , {} sau <> . Acesti delimitatori nu trebuie escapati
+        daca sunt folositi in definirea pattern-ului ( meta-character ), dar trebuie escapati cand fac
+        parte din expresia cautata
+
+
+
+
+            Parantezele patrate []
+
+            Verifica existenta caracterelor afisate intre paranteze patrate. Daca mai multe caractere se afla intre paranteze patrate, inseamna ca oricare dintre acele caractere poate sa fie continut in secventa de text in care se face cautarea
+
+            $string = "curs de php";
+
+            /[cpfu]/ - cel putin o litera dintre paranteze se regaseste in string
+
+            Daca folosim cratim, putem definii o arie de cautare:
+
+            $string = "curs de php";
+            /[a-z]/ - inseamna toate literele de la a la z
+            Daca folosim semnul ^ la inceputul de secventa intre paranteze patrate, presupune o negare si astfel avem :
+
+
+            $string =   "curs de php";
+            /[^0-9]/ - inseamna ca stringul de mai sus nu are nicio cifra
+
+            Combinatia .*+$
+
+            Punctul reprezinta orice caracter, iar * si + multiplica secventa. Semnul ? presupune ca secventa apare o data sau deloc
+
+
+            /[0-9]*/ - presupune orice cifra de la 0 la 9 care poate sa apara de 0 sau nunumarate ori
+            /[0-9]+/ - presupune orice cifra de la 0 la 9 care poate sa apara o data sa de nenumarate ori
+            /[a-z]./ - orice litera urmata de orice caracter
+            /[a-z]?[0-9]/ - orice litera urmata de orice cifra sau doar orice cifta
+
+
+
+                Subpattern ()
+
+                In cadrului unui pattern putem include in parateze rotunde un alt pattern, numit subpattern.
+                Astfel, expresia regulata intoarce atat intreg pattern-ul cat si subpattern-urile care il compun
+
+                /Invatam ([A-Z]{3,4}?) cu mare placere/ - conduce atat la patternul 'Invatam cu placere', dar
+                si la expresii de genul 'Invatam PHP cu placere' sau 'Invatam JAVA cu placere'.
+
+                Functii PHP pentru lucrul cu expresii regulate
+
+                Cautare in string
+
+                Functia preg_match cauta un anumit pattern intr-un string si returneaza 1, daca pattern-ul
+                a fost gasit,0 daca nu a fost gasit si FALSE in cazul unei erori. De asemnea, daca este furnizat
+                si al treilea paramentru, el va contine intr-un array pattern-ul gasit, cat si subpattern-urile gasite
+
+
+
+
+                    Cum preg_match se opreste imediat ce a gasit primul pattern, daca dorim sa aflam de cate ori a fost gasit pattern-ul si sa avem acces
+                    la toate secventele gasite, vom apela la functia:
+
+                    preg_match_all
+
+                    O alta functie utila este cea care cauta un pattern pentru a-l inlocui cu o expresie
+
+                     $str = "April 15, 2003";
+                            $pattern = '/(\w+) (\d+), (\d+)/i';
+                            $replacement = '${1}1,$3';
+
+                            echo preg_replace($pattern,$replacement,$str);
+
+
+
+                     Alte functii utile puteti gasi in manualul de PHP
+
+                     Intrumente utile :
+
+                     Un simulator unde va puteti testa expresiile regulate si aveti, de asemenea, acces la un mini-tutorial
+
+                     http://regexr.com/
+
+                     Youtube : Ultimul video parca din PHP Khrizz ( Cristian )
+
+
+
+
+
+                     Cam atat pentru astazi, am trecut prin tot ce ne intereseaza :)
+
+

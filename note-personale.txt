@@ -1,0 +1,13 @@
+// Exercițiul 1 (dificultate mică):
+//   Scrieți un program în PHP care afișează suma tuturor elementelor dintr-un array de numere întregi.
+
+$array = array(1, 8, 32, 40);
+
+$sum = 0;
+
+foreach($array as $nr) {
+  $sum += $nr;
+}
+ echo $sum;
+
+ //foreach nu este o functie ci o structura de control a limbajului php. nu folosim return in aceasta rezolvare pentru ca nu avem nicio functie

@@ -1,0 +1,435 @@
+
+
+Siruri de caractere
+
+
+        Le-am intalnit deja in cap precedente, dar in acest capitol vom discuta pe larg despre
+        string-uri si modul in care le putem gestiona eficient in PHP
+
+        Un string nu este nimic altceva decat o insusire de caractere. Fiecare caracter dintr-un string este un byte. Iar 1 byte = 8 biti - ceea
+        ce inseamna ca nativ, in PHP vom putea gestiona cel mult pow(2,8) = 256 caractere :)
+
+        Desi probabil, in practica nu veti atinge prea des aceasta limita, este bine de mentionat ca dimenisunea maxima pentru un string in php
+        este de 2GB
+
+        Exista 4 moduri de a defini un string
+
+        1. Prin apostrofuri - ghilimele simple
+
+        $string = 'Horia are mere';
+
+        2. Prin ghilimele duble
+
+        $string = "Am luat nota mica";
+
+        3. Prin notatia heredoc
+
+        $string =<<<HEREDOC
+        Ana are mere
+        HEREDOC;
+
+        4. Prin notatia nowdoc
+
+        $string  =<<<'NOWDOC'
+        Ana are mere
+        NOWDOC;
+
+        Definirea prin apostrofuri
+
+        Particularitatea definirii de string-uri folosind apostrofuri este aceea ca variabilele din interiorul string-urilor nu vor fi expandate ( interpetrate )
+
+        $fruncte = "mere";
+
+        echo 'Ana are $fructe'; // pe ecran va aparea : Ana are $fructe
+
+        De asemenea, trebuie gestionata si situatia in care dorim sa folosim apostrofuri in string-ul nostru. In acest caz nu trebuie decat sa
+        prefixam apostroful respectiv cu caracteru \ ( backslash )
+
+
+
+        echo 'Caracterul \ ' se numeste apostrof';
+        // pe ecran va aparea : Caracterul ' se numeste apostrof, incercati si voi
+
+        Similar daca, dorim sa afisam caracterul \ il vom prefixa cu el insusi:
+
+
+        echo 'Caracterul \\ se numeste backslash';
+
+        // pe ecran va aparea : Caracterul \ se numeste blackslah
+
+
+
+        Secventa                                                    Semnificatie
+
+
+        \n                                          linie noua ( caracterul LF - line feed; sau 0X0A ( 10 ) in ASCII )
+        \r                                          caracterul intoarcere ( CR - carriage return; sau 0X0D ( 13 ) in ASCII )
+        \t                                          tab oriziontal ( HT - horizontal tab, sau 0X09 ( 9 ) in ASCII )
+        \v                                          tab vertical ( VT -  vertical tabl, sau 0X0B ( 11 ) in ASCII )
+        \e                                          escape ( caracterul special ESC; sau 0X18 ( 11 ) in ASCII )
+        \f                                          form feed ( FF sau 0XCC ( 12 ) in ASCII ( incepand cu php 5.2.5 )
+        \\                                          backslash
+        \$                                          semnul dolar
+        \"                                          ghilimele duble
+        \[0-7]{1,3}                                 o secventa care denota un caracter reprezentat in octal ( o cifra de la 0 la 7 )
+                                                    repetata o data, de doua sau cel de trei ori : ex ( \75)
+        \x[0-9A-Fa-f]{1,2}                          o secventa care denota un caractere reprezentat in hexazecial ( x urmat de o cifra de la 0 la 9
+                                                    sau o litera de la A la F repetata o data sau de doua ori ex ( \x7C
+
+
+
+
+        ( o sa incheiem la 23:00 ) partea 3 o sa aiba loc maine de la ora 20 - 23 )
+
+
+        Determinarea lungimii
+
+        Lungimea unui sir de caractere poate fi determinata folosind functia strlen
+
+        $sms = "Alo, te astept, unde esti?";
+
+                    $lungimeSms = strlen($sms);
+                    echo $lungimeSms; // va aparea 26
+
+          Extragerea unui subsir
+
+          In practica, ne vom lovi de situatii in care trebuie sa extragem un subsir dintr-un string mai mare.
+
+          Pentru acesta putem folosi functia substr
+
+          un exemplu :
+
+
+//            $sms = "Te astept la gara";
+//
+//            $locatie = substr($sms, -4); // ultimile 4 caractere
+//
+//            echo "Loc de intalnire : $locatie"; // va fi afisat Loc de intalnire :  gara
+//
+
+            // sau
+
+echo "<br>";
+
+            $sms = "Te astept la gara";
+
+            $locatie = substr($sms,13,-2); // de la pozitia 13 pana la antepenultima
+
+            echo "Loc de intalnire: $locatie"; // va afisa : Loc de intalnire : ga
+
+
+Cautarea in sir
+
+        Functia strpos
+
+        In ex anterioare am presupus ca am fi cunoscut deja pozitia la care se regaseste cuvantul de intere "gara". Totusi, in practica
+        nu ne putem bucura din acest privilegiu. Dar avem o serie de unele puse la dispozitie de limbaj. Dintre aceastea cea mai cunoscuta
+        si utilizata este functia strpos
+
+
+         $litere = "ABCDEFSQWEQEWQEQWEWQQWE";
+
+                    $pozitie = strpos($litere,'C');
+
+                    echo "Litera C este a $pozitie-a din alfabet";
+                    //Litera C este a 2-a din alfabet
+
+
+               Litera C este a doua din alfabet?    NU, Totusi de ce in exemplu de mai sus afiseaza asta? Pentru ca, precum probabil
+               v-ati obisnuit deja, indexarea in majoritatea limbajelor de programare incepe de LA 0 :) . Asta inseamna ca, in exemplul de mai sus
+               , A este pe pozitia 0, B pe pozitia 1, C pe pozitia 2, D pe pozitia 3 si asa mai departe. Functia strpos nu face nimic altceva decat
+               sa afiseze pozitia la care se gaseste substring-ul respectiv in string-ul specificat
+
+
+                $litere = "ABCDEFGHIJKLMNOP";
+
+                       $pozitie = strpos($litere,'C')+1;
+
+                       echo "Cifra 3 este a $pozitie-a cifra para"; // Cifra 3 este a 3-a cifra para
+
+
+                       Daaa acum are sens :)
+
+                       Sa mai facem un exemplu
+
+
+                         $cifre_pare = "02468";
+
+                               $pozitie = strpos($cifre_pare,'3') + 1;
+
+                               echo "Cifra 3 esta a $pozitie-a cifra para";//Cifra 3 esta a 1-a cifra para
+
+
+                               Nu are sens nu? Acest lucru se intampla pentru ca cifra 3 nu este regasita in string-ul 02468
+                               si functia strpos intoarce fals pentru aceasta situatie. Totusi, in PHP, putem aduna valoarea 1 la fals
+                               ( care, numeric, are valoarea 0 ( si deci $pozitie 1 ( 0 + 1) de aici rezultatul eronat
+
+
+                               Solutia este sa tratam aceast caz :
+
+
+
+
+
+//        $cifre_pare = "02468";
+//
+//        $cifra = '3';
+//
+//        $pozitie = strpos($cifre_pare,$cifra);
+//
+//        if($pozitie !==false){
+//            $pozitie = $pozitie +1;
+//            echo "Cifra $cifra  este a $pozitie-a cifra para";
+//        }
+//
+
+        // Atentie la comparare folosind !== ( egalitate stricta ) si nu != ( egalitate ca valoare ) este o greseala, pe care o veti putea
+        // intalni frecvent in practica, iata un exemplu :
+
+
+
+        $lista_categori = "Tiberiu, Vlad, Ioana";
+
+        $concurent = 'Tiberiu';
+
+        $a_castigat = strpos($lista_categori,$concurent);
+
+        if($a_castigat){
+
+            echo "Felicitari,$concurent! Ai castigat!";
+
+
+        }else{
+            echo "Ne pare rau, $concurent, dar nu ai castigat!";
+        }
+        // de ce nu afiseaza corect? // va las pe voi
+
+
+
+        Alte functii - stripos
+
+        Dupa cum ne-am obisnuit deja, si functia strpos are cateva functii "prietene", foarte similare :
+
+        stripos
+
+        Este identica  cu strpos, cu exceptia faptul ca este case-insensitive ( nu tine cont daca literele sunt mici sau mari )
+
+             $utilizator = "superAdMiN";
+
+                        if(stripos($utilizator,'admin')){
+                            echo "Numele de utilizator cotine cuvinte interzise!";
+                        }
+
+
+            strstr
+
+            Similar cu stripos, functia strstr ( care se comporta ca strstr, doar ca este case-insensitive)
+
+
+
+           $email = "digital@info.ro";
+           $domeniu = strstr($email,'@');
+           echo $domeniu; // va afisa @info.ro
+
+           Compararea sirurilor ( si punem pauza pe seara aceasta )
+
+
+           Operatorul === si ==
+
+           Cel mai simplu mod de a compara doua string-uri este folosind operatorul == sau ===. Dupa cum stiti deja, operatorul ==
+           verifica egalitatea, iar operatorul === verifica egalitatea stricta ( atat valoarea cat si tipul celor doi operanzi trebuie
+           sa fie egale )
+
+           Trebuie sa avem grija atunci cand ( probabil, neintentionat ) ajungem sa comparam string-uri cu numere folosind operatorul ==
+           ( in dauna operatorului === ) . In aceasta situatie, trebuie tinut cont de urmatoarele reguli
+
+           1. String-ul va fi convertit la numar, iar comparatia va fi una numerica
+           2. Daca ambii operanzii sunt sintr-uri dar contin reprezentari valide de numere, atunci comparatia se va face tot numeric
+
+
+                 $zero = 0;
+
+                   $string_gol = "";
+                   $cumparaturi = "6 mere, 4 pere";
+                   $bucuresti = "Bucuresti";
+
+                   var_dump($zero == $string_gol); // bool(false ) ( oboseala isi face efectul ) :)
+                   var_dump($cumparaturi == 6); // bool(false)
+                   var_dump($bucuresti == $zero); // bool(false)
+
+
+                   ( o sa incheiem pe aceasta seara, o sa reluam maine in jur de 19:00 maxim pana la 21 maxim :)
+                   Seara faina
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

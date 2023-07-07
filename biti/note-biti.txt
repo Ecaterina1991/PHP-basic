@@ -1,0 +1,92 @@
+1.
+
+
+//baza 10
+//$numar = 23;
+//$binar = decbin($numar);
+//echo $binar;//afiseaza 10111
+//var_dump($binar);
+
+//decbin returneaza o reprezentare binara sub forma de string
+
+/*
+În acest exemplu, începem prin declararea variabilei "$numar" și asignarea valorii 23. Aceasta este o valoare întreagă exprimată în baza 10.
+
+Apoi, folosim funcția "decbin()" pentru a converti numărul din baza 10 în baza 2 (sistemul binar). Rezultatul conversiei este stocat în variabila "$binar".
+
+În cele din urmă, folosim funcția "echo" pentru a afișa valoarea binară stocată în variabila "$binar".
+
+Rezultatul afișat va fi "10111", care este valoarea corespunzătoare în sistemul binar pentru numărul întreg 23 exprimat în baza 10.
+
+**Cum se converteste numarul din baza 10 in baza 2?
+
+
+Pentru a converti un număr din baza 10 în baza 2 (sistemul binar), putem utiliza următorii pași:
+
+Împărțim numărul întreg la 2 și notăm restul împărțirii.
+Împărțim rezultatul anterioar cu 2 și notăm restul împărțirii.
+Continuăm să împărțim rezultatul anterioar la 2 și să notăm restul împărțirii, până când obținem rezultatul 0.
+Pentru a obține valoarea binară a numărului, scriem resturile în ordine inversă, de la ultimul rest obținut la primul rest.
+Să luăm ca exemplu convertirea numărului 23 din baza 10 în baza 2:
+
+23 împărțit la 2 are restul 1. Notăm restul: 1.
+11 împărțit la 2 are restul 1. Notăm restul: 1.
+5 împărțit la 2 are restul 1. Notăm restul: 1.
+2 împărțit la 2 are restul 0. Notăm restul: 0.
+1 împărțit la 2 are restul 1. Notăm restul: 1.
+0 împărțit la 2 are restul 0. Notăm restul: 0.
+Valoarea binară a numărului 23 este dată de resturile obținute în ordine inversă: 10111.
+
+Funcția "decbin()" din PHP efectuează acest proces automat, convertind numărul din baza 10 în baza 2 și returnând valoarea binară corespunzătoare.
+*/
+
+
+2.
+
+$binar = '10111';
+$decimal = bindec($binar);
+echo $decimal; //23
+
+/*
+Cifra din dreapta este 1, deci se calculează 1 * 2^0 = 1.
+Se trece la cifra următoare la stânga, care este tot 1, și se calculează 1 * 2^1 = 2.
+Se trece la următoarea cifră la stânga, care este 1, și se calculează 1 * 2^2 = 4.
+Se trece la următoarea cifră la stânga, care este 0, deci se calculează 0 * 2^3 = 0.
+Se trece la ultima cifră la stânga, care este 1, și se calculează 1 * 2^4 = 16.
+
+
+Se adună produsele obținute la fiecare pas: 1 + 2 + 4 + 0 + 16 = 23.
+Astfel, numărul binar 10111 este echivalent cu numărul zecimal 23. Aceasta este operația pe care o realizează funcția bindec() în PHP, în mod automat și implicit, atunci când primește un șir de caractere reprezentând un număr binar.
+
+*/
+
+3.
+
+
+//pentru a verifica un bit dintr-un  numar utilizam:
+
+  $numar = 5; //101
+  $n = 3;
+
+  if(($numar >> ($n-1)) & 1) {
+    echo "Bitul $n este setat la 1";
+} else {
+  "Binul $n este setat la 0";
+}
+
+/*
+Acest fragment de cod PHP verifică dacă bitul de pe poziția a n-a din reprezentarea în binar a numărului $numar este setat la valoarea 1.
+
+Mai precis, se pornește de la faptul că un număr zecimal poate fi reprezentat în sistemul binar prin folosirea de biți, adică de 0-uri și 1-uri, astfel încât fiecare bit reprezintă o putere a lui 2. Astfel, cel mai puțin semnificativ bit are valoarea 2^0 (adică 1), următorul bit are valoarea 2^1 (adică 2), apoi 2^2 (adică 4), 2^3 (adică 8), și tot așa.
+
+În expresia ($numar >> ($n-1)) & 1, operatorul >> reprezintă operatorul de deplasare la dreapta cu $n-1 biți, astfel încât bitul de pe poziția a n-a (numărând de la dreapta la stânga) devine bitul cel mai puțin semnificativ. După aceea, operatorul & efectuează o operație de bit AND între valoarea obținută prin deplasare și valoarea 1, astfel încât se obține 1 dacă bitul cel mai puțin semnificativ este setat la 1, și 0 altfel.
+
+În cazul în care bitul de pe poziția a n-a este setat la 1, se va afișa mesajul "Bitul n este setat la 1". În caz contrar, se va afișa mesajul "Bitul n este setat la 0".
+
+De exemplu, dacă avem $numar = 5 (reprezentat în binar ca 101) și $n = 3, expresia ($numar >> ($n-1)) & 1 se evaluează astfel:
+
+$n-1 este 2, deci deplasăm numărul $numar cu 2 biți spre dreapta: $numar >> 2 devine 1 (adică 001 în binar).
+Efectuăm o operație AND între valoarea obținută prin deplasare și valoarea 1, astfel încât 1 & 1 devine 1.
+Deoarece rezultatul este 1, se afișează mesajul "Bitul 3 este setat la 1".
+Astfel, în cazul de mai sus, codul va afișa mesajul "Bitul 3 este setat la 1".
+

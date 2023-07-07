@@ -1,0 +1,128 @@
+ 
+//(conditie) ? true-valoare : false- valoare
+
+$numarul = 8;
+$result = ($numarul % 2 == 0) ? "Numar par" : "Numar impar";
+echo $result;
+?>
+//procent = modula(%)
+
+$a = 5;
+$b = "5";
+
+if($a == $b) {
+  echo "a egal b";
+}
+
+if($a === $b) {
+  echo "a identic cu b";
+}
+
+if($a !== $b) {
+  echo "nu sunt egale";
+} 
+ 
+ 
+ //operatori de comparatie
+
+// <, >, <=>, =>, >=, <=
+
+// $x = 3;
+// $y = 2;
+
+// if($y <=> $x) {
+//   echo "Este mai mare";
+// }
+// else {
+//   echo "este mai mic";
+// }
+
+//operatori de comparatie
+
+//== - compara 2 expresii si returneaza adevarat daca sunt egale
+
+//===
+//!==
+ 
+$x = 10;
+$y = 2;
+$c = 9;
+$d = 11;
+
+if(($x || $c) && ($d || $y)) {
+  echo "{$x} si {$c} sunt true";
+}
+else {
+  echo "";
+}
+ 
+ //operatori logici 
+//&& and || sau si !negatie
+
+
+// $text = true;
+
+// if(!$text) {
+//   echo "este adevarat!";
+// } else {
+//   echo"este fals";
+// }
+
+if ((2 || 2) && (3||3)) {
+  
+}
+ 
+ //$$
+
+//cei mai folositi operatori
+
+/*
+1. = 10
+2. += ($x += $x);
+3 *=
+4. /=
+5. .=
+6. %=
+7. -=
+*/
+
+ //$primul = "salut";
+
+
+ //$primul += $primul;//20
+// $primul *= $primul; //400
+ //$primul /= $primul; //1
+ //echo $primul .=  $primul;
+
+ $text = 17;
+ $text_2 = 2;
+
+ //echo $text %= $text;
+ echo $text -= $text_2;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+$x = 'abc';
+$$x = 200;
+echo $x . "<br>";
+echo $xx . "<br>";
+echo $abc;
+
+
+  
+  
+  isset verifica daca variabila este setata
+  
+  sub codul php putem utiliza html si css
+
+  comentariu //
+  sau /* */
+
+  localhost urmat de nume folder apoi nume fisier localhost
+  localhost/folder/fisier.php 
+
+  pentru inchidere deschiere folosim acelasi tip de ghilimele                     
