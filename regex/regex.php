@@ -292,6 +292,72 @@
 //   echo "sirurile din ghilimele sunt: ".implode(" ", $arr);
 // }
 
+//Verificați dacă un șir este un număr de telefon valid (formatul: (xxx) xxx-xxxx):
+//  $sir = "(156)897-1589";
+
+//   //$sablon = '/^\(\d{3}\) \d{3}-\d{4}$/';
+
+// if(preg_match_all('/^\(\d{3}\)\d{3}-\d{4}$/', $sir, $potriviri)) {
+//   $arr=$potriviri[0];
+//   echo "Numarul de telefon se potriveste cu schema si este: ".implode('', $arr);
+// }
+
+//Găsiți toate numerele într-un șir:
+
+// $sir = "5465 bvsab 87985 kbgqdi 5456";
+
+// if(preg_match_all('/\b\d+\b/', $sir, $potriviri)) {
+//   $arr=$potriviri[0];
+//   echo "Exista numere in sir si acestea sunt: " . implode(",", $arr);
+// }
+
+
+// Găsiți toate cuvintele care conțin cel puțin 3 litere și se termină cu litera "s":
+// php
+// Copy code
+// $pattern = '/\b\w{3,}s\b/i';
+// Găsiți toate șirurile care încep și se termină cu aceeași literă:
+// php
+// Copy code
+// $pattern = '/^(.).*\1$/';
+// Găsiți toate numerele de telefon în formatul internațional (exemplu: +1-555-123-4567):
+// php
+// Copy code
+// $pattern = '/^\+\d{1,}-\d{3}-\d{3}-\d{4}$/';
+// Verificați dacă un șir este un URL valid:
+// php
+// Copy code
+// $pattern = '/^(http|https):\/\/[a-z0-9]+\.[a-z]{2,4}$/i';
+// Găsiți toate cuvintele care încep cu litera "S" și au lungimea exact 3 caractere:
+// php
+// Copy code
+// $pattern = '/\bS\w{2}\b/i';
+// Găsiți toate cuvintele care conțin doar litere și spații:
+// php
+// Copy code
+// $pattern = '/^[A-Za-z\s]+$/';
+// Găsiți toate numerele între 100 și 999:
+// php
+// Copy code
+// $pattern = '/\b[1-9]\d{2}\b/';
+// Verificați dacă un șir este o adresă de e-mail validă:
+// php
+// Copy code
+// $pattern = '/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/';
+// Găsiți toate cuvintele care conțin literele "a", "b" și "c", în orice ordine:
+// php
+// Copy code
+// $pattern = '/\b(?=.*a)(?=.*b)(?=.*c)\w+\b/i';
+// Găsiți toate șirurile care încep cu o vocală și se termină cu o consoană:
+// php
+// Copy code
+// $pattern = '/^[aeiou]\w*[bcdfghjklmnpqrstvwxyz]$/i';
+// Găsiți toate cuvintele care conțin exact trei vocale:
+// php
+
+
+
+
 
 
 
