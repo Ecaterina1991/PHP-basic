@@ -848,18 +848,22 @@
 // echo "</pre>";
 
 
-$v= "Valentin";
-$e= "Ecaterina";
+// $v= "Valentin";
+// $e= "Ecaterina";
 
-function concatenare() {
-$GLOBALS['z'] = $GLOBALS['v'] . $GLOBALS['e'];
-}
+// function concatenare() {
+// $GLOBALS['z'] = $GLOBALS['v'] . $GLOBALS['e'];
+// }
 
-concatenare();
+// concatenare();
 
-echo $z;
+//echo $z;
 
 //variabila superglobala GLOBALS[''] face accesibile variabilele abordate de oriunde. se trece intre [] si intre ''  numele variabilei
 
+//echo $_SERVER['SERVER_ADDR'];
+
+// $v= $_SERVER['SERVER_ADDR'];
+// var_dump($v);
 
 ?>

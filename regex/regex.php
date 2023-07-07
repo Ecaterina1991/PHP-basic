@@ -202,9 +202,95 @@
 
 
 
+// $s = "Bbracadabra";
+
+
+// if(preg_match('/^A/', $s)) {
+// echo "true";
+// } else {
+// echo "false";
+// }
+
+
+// $s = " ips lorem ipsum lorem ips";
+
+// if(preg_match('/^lorem/', $s)) {
+//   echo "exista lorem aici la inceput de string";
+// }
+// else {
+//   echo "nu exista";
+// }
+
+// $s = " ips lorem ipsum lorem ipsum";
+
+// if(preg_match('/ipsum$/', $s)) {
+//   echo "ipsum e la final";
+// }
+// else {
+//   echo "nu este";
+// }
+
+//$s = "ips 584856lorem 59560967ipsum 7-89-=89lorem ipsum";
+
+// if(preg_match('/\d/', $s)) {
+// echo "exista cifre aici";
+// }
+// else {
+// echo "nu exista";
+// }
+
+//returnare cifre din string
+
+// if(preg_match_all('/\d+/', $s, $matches)) {
+//   $arr = $matches[0];
+//   echo "Numerele din string sunt: ".implode(", ", $arr);
+// } 
+// else {
+//   "nu exista";
+// }
 
 
 
+
+
+
+//gasiti toate literele majuscule intr-un sir
+
+// $sir = "ugq8fgFYUDYDYjhgiDRTYSTUljoihiGYGY";
+
+// if(preg_match_all('/[A-Z]/', $sir, $depozit)) {
+//   $arr=$depozit[0];
+//   echo "Majusculele dun string sunt: ".implode(", ", $arr );
+// }
+
+
+//Verificați dacă un șir conține cel puțin o vocală:
+
+  //$sir = "ugq8fgFYUDYDYjhgiDRTYSTUljoihiGYGY";
+
+// if(preg_match_all('/[aeoui]/i', $sir, $depozit)) {
+//   $arr = $depozit[0];
+//   echo "Sirul contine cel putin o vocala. Acestea sunt vocalele gasite:".implode(", ", $arr);
+// }
+
+//gasiti toate cuvintele care incep cu T
+
+// $sir = "Mama Tata Copilul";
+
+// if(preg_match_all('/\bT\w+/', $sir, $potriviri)) {
+//   $arr = $potriviri[0];
+//   echo "Sirul contine urmatoarele cuvinte care incep cu litera T: ". implode('', $arr);
+// }
+
+//Găsiți toate șirurile de caractere între ghilimele duble:
+
+
+// $sir = 'vfaihwoa" akofpuhwqhg4738" jouqf0hy90';
+
+// if(preg_match_all('/"([^"]+)"/', $sir, $potriviri)){
+//   $arr=$potriviri[0];
+//   echo "sirurile din ghilimele sunt: ".implode(" ", $arr);
+// }
 
 
 
