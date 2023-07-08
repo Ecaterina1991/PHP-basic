@@ -311,55 +311,61 @@
 //   echo "Exista numere in sir si acestea sunt: " . implode(",", $arr);
 // }
 
+//Găsiți toate cuvintele care conțin cel puțin 3 litere și se termină cu litera "s":
 
-// Găsiți toate cuvintele care conțin cel puțin 3 litere și se termină cu litera "s":
-// php
-// Copy code
-// $pattern = '/\b\w{3,}s\b/i';
-// Găsiți toate șirurile care încep și se termină cu aceeași literă:
-// php
-// Copy code
-// $pattern = '/^(.).*\1$/';
+
+// $string= "lorem ips lor sum lios ple lores";
+
+// $pattern = '/\b\w{3,}s\b/';
+
+// if(preg_match_all('/\b\w{3,}s\b/', $string, $depozit)) {
+//   $arr=$depozit[0];
+//   echo "Cuvintele care contin cel putin 3 litere si se termina cu litera 's' sunt: ".implode(", ", $arr);
+// }
+
 // Găsiți toate numerele de telefon în formatul internațional (exemplu: +1-555-123-4567):
-// php
-// Copy code
-// $pattern = '/^\+\d{1,}-\d{3}-\d{3}-\d{4}$/';
-// Verificați dacă un șir este un URL valid:
-// php
-// Copy code
-// $pattern = '/^(http|https):\/\/[a-z0-9]+\.[a-z]{2,4}$/i';
-// Găsiți toate cuvintele care încep cu litera "S" și au lungimea exact 3 caractere:
-// php
-// Copy code
-// $pattern = '/\bS\w{2}\b/i';
-// Găsiți toate cuvintele care conțin doar litere și spații:
-// php
-// Copy code
-// $pattern = '/^[A-Za-z\s]+$/';
-// Găsiți toate numerele între 100 și 999:
-// php
-// Copy code
-// $pattern = '/\b[1-9]\d{2}\b/';
-// Verificați dacă un șir este o adresă de e-mail validă:
-// php
-// Copy code
-// $pattern = '/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/';
-// Găsiți toate cuvintele care conțin literele "a", "b" și "c", în orice ordine:
-// php
-// Copy code
-// $pattern = '/\b(?=.*a)(?=.*b)(?=.*c)\w+\b/i';
-// Găsiți toate șirurile care încep cu o vocală și se termină cu o consoană:
-// php
-// Copy code
-// $pattern = '/^[aeiou]\w*[bcdfghjklmnpqrstvwxyz]$/i';
-// Găsiți toate cuvintele care conțin exact trei vocale:
-// php
 
+  // $string = "+1-855-965-1254";
 
+  // if(preg_match_all('/^\+\d{1,}-\d{3}-\d{3}-\d{4}$/', $string, $depozit)) {
+  //   $arr=$depozit[0];
+  //   echo "Acest numar se potriveste sablonului de cautare: ".implode("", $arr);
+  // }
 
+  //Verificați dacă un șir este un URL valid:
 
+    // $str = "http://example.com";
 
+    // if(preg_match_all('/^(http|https):\/\/[a-z0-9]+\.[a-z]{2,4}$/i', $str, $depozit)){
+    //   $arr=$depozit[0];
+    //   echo "Aceasta adresa de email se potriveste cu sablonul: ".implode("", $arr);
+    // }
 
+    //Găsiți toate numerele între 100 și 999:
 
+  // $my_array=range(100,999);
+
+  
+  // //print_r($my_array);
+
+  // $string=implode(", ", $my_array);
+  // //echo $string;
+
+  // if(preg_match_all('/\b[1-9]\d{2}\b/', $string, $potriviri)) {
+  //   $arr=$potriviri[0];
+  //   echo "Se potrivesc cu cerinta urmatoarele numere:".implode(', ', $arr);
+  // }
+
+  //Verificați dacă un șir este o adresă de e-mail validă:
+    //reguli de baza: sir de caractere obligatoriu + (optional semnele \.- care pot sa apara o data sau deloc apoi alt sir de carctere) - ce e in paranteze poate fi prezent sau poate sa nu fie deloc @ sir de caractere +optional(\.- care pot sa apara o data sau deloc si alt sir de caractere) ce este in paranteze poate fi prezent sau poate lipsi ---apoi punct si doua trei caractere prezente cel putin o data
+
+    // $string='barganecaterina@yahoo.com';
+
+    // if(preg_match_all('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $string, $potriviri)) {
+    //   $arr=$potriviri[0];
+    //   echo "Se potriveste cerintei emailul: ".implode('', $arr);
+   // }
+
+   
 
 ?>
